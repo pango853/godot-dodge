@@ -21,14 +21,20 @@ func game_over():
 	$ScoreTimer.stop()
 	$MobTimer.stop()
 
+	$HUD.show_game_over()
+
 func new_game():
 	score = 0
 	$Player.start($StartPosition.position)
 	$StartTimer.start()
 
+	# update the score display and show the "Get Ready" message
+	$HUD.update_score(score)
+	$HUD.show_message("Get Ready")
 
 func _on_ScoreTimer_timeout():
 	score += 1
+	$HUD.update_score(score)
 
 func _on_StartTimer_timeout():
 	$MobTimer.start()
